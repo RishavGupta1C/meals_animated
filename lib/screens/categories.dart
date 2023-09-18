@@ -19,8 +19,6 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
-  _animationController;
-
   @override
   void initState() {
     super.initState();
