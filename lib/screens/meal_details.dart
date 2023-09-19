@@ -33,8 +33,23 @@ class MealDetailsScreen extends ConsumerWidget {
                 ),
               );
             },
+            // Animation will work whenever child will update
             icon: AnimatedSwitcher(
-              child: Icon(isFavorite ? Icons.star : Icons.star_border),
+              child: Icon(
+                isFavorite ? Icons.star : Icons.star_border,
+                key: ValueKey(isFavorite),
+              ),
+              // The below child is actually pointing to above child
+              transitionBuilder: (child, animation) {
+                return RotationTransition(
+                  // turns: animation,
+                  turns: Tween<double>(
+                    begin: 0.8,
+                    end: 1,
+                  ).animate(animation),
+                  child: child,
+                );
+              },
               duration: const Duration(milliseconds: 300),
             ),
           )
