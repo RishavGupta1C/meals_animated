@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:meals_animated/data/dummy_data.dart';
 import 'package:meals_animated/models/meal.dart';
 import 'package:meals_animated/widgets/category_grid_item.dart';
@@ -80,11 +79,36 @@ class _CategoriesScreenState extends State<CategoriesScreen>
             )
         ],
       ),
-      builder: (context, child) => Padding(
-          padding: EdgeInsets.only(
-            top: 100 - _animationController.value * 100,
+      // builder: (context, child) => Padding(
+      //     padding: EdgeInsets.only(
+      //       top: 100 - _animationController.value * 100,
+      //     ),
+      //     child: child),
+
+      // More optimized
+      // builder: (context, child) => SlideTransition(
+      //   position: _animationController.drive(
+      //     Tween(
+      //       begin: const Offset(0, 0.3),
+      //       end: const Offset(0, 0),
+      //     ),
+      //   ),
+      //   child: child,
+      // ),
+
+      // Extra Features
+      builder: (context, child) => SlideTransition(
+        position: Tween(
+          begin: const Offset(0, 0.3),
+          end: const Offset(0, 0),
+        ).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeInOut,
           ),
-          child: child),
+        ),
+        child: child,
+      ),
     );
   }
 }
